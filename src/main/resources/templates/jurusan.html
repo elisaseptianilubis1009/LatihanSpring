@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head th:replace="index::head"></head>
+    <body class="sb-nav-fixed">
+    
+        <a th:replace="index::nav"></a>
+        <div id="layoutSidenav"> 
+        
+		<div th:replace="index::sidebar"></div>
+		
+            <div id="layoutSidenav_content">
+                <main>
+                   <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table mr-1"></i>
+                                <h1> DataTable Jurusan </h1>
+                            </div>
+                            <div class="card-header">
+                              <a th:href="@{'/jurusan/create'}" class="btn btn-primary  text white mt-2"> Tambah Data</a>  
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th bgcolor="grey" style="text-align: center;">No</th>
+                                                <th bgcolor="grey" style="text-align: center;">kode_jur</th>
+                                                <th bgcolor="grey" style="text-align: center;">Jurusan</th>
+                                                <th bgcolor="grey" style="text-align: center;">Fakultas</th>
+                                                <th bgcolor="grey" style="text-align: center;">Action</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="row,var: ${jurusan}">
+                                                <td style="text-align: center;" th:text="${var.count}"></td>
+                                                <td style="text-align: center;" th:text="JUR- + ${row.id}"></td>
+                                                <td style="text-align: center;" th:text="${row.nama}"></td>
+                                                <td style="text-align: center;" th:text="${row.fakultas.nama_fakultas}"></td>
+                                                </td>
+                                                <td style="text-align: center;">
+                                                    <a th:href="@{'/jurusan/edit/' +${row.id}}" th:id="${row.id}" class="btn btn-sm btn-success text white"> Ubah</a>
+
+                                                    <a th:href="@{'/jurusan/delete/' +${row.id}}"  onclick="return confirm('Yakin ingin dihapus?')" class="btn btn-sm btn-danger">Hapus</a>
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        </main>
+                 <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Your Website 2020</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+         </div>  
+        <div th:replace="index::js"></div>
+     </body>
+</html>
