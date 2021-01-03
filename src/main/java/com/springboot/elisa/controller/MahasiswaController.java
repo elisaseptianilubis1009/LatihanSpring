@@ -16,6 +16,7 @@ import com.springboot.elisa.repository.JurusanRepository;
 import com.springboot.elisa.repository.MahasiswaRepository;
 
 
+
 //import org.springframework.web.servlet.ModelAndView;
 //@RestController = ini dipake kalo methodnya nge return string atau json, misal mau bikin web service
 @Controller//hanya dapat mengembalikan file.html

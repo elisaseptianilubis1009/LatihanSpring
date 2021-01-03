@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head th:replace="index::head"></head>
+    <body class="sb-nav-fixed" ng-app="aplikasiLatihan">
+        <a th:replace="index::nav"></a>
+        <div id="layoutSidenav"> 
+		<div th:replace="index::sidebar"></div>
+            <div id="layoutSidenav_content">
+                <main>
+                   <div class="card mb-4" ng-controller="EmployeeController">
+                            <div class="card-header">
+                                <i class="fas fa-table mr-1"></i>
+                                <h1> Data Pegawai </h1>
+                            </div>
+
+                            <div class="card-header">
+                              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalEdit" ng-click="editEmployee()">
+                                Tambah Data
+                            </button>
+                          
+                            </div>
+
+                            <div class="card-body" >
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th bgcolor="grey" style="text-align: center;">No</th>
+                                                <th bgcolor="grey" style="text-align: center;">NIP</th>
+                                                <th bgcolor="grey" style="text-align: center;">NAME</th>
+                                                <th bgcolor="grey" style="text-align: center;">BIRTH DATE</th>
+                                                <th bgcolor="grey" style="text-align: center;">GENDER</th>
+                                                <th bgcolor="grey" style="text-align: center;">POSITION</th>
+                                                <th bgcolor="grey" style="text-align: center;">Action</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="e in dataEmployee">
+                                                <td style="text-align: center;">{{e.id}}</td>
+                                                <td style="text-align: center;">{{e.id_NUMBER}}</td>
+                                                <td style="text-align: center;">{{e.name}}</td>
+                                                <td style="text-align: center ;">{{e.birth_DATE}}</td>
+                                                <td style="text-align: center;">{{e.gender}}</td>
+                                                <td style="text-align: center;" >{{e.position.name}}</td>
+                                                </td>
+                                                <td style=" text-align: center">
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEdit" ng-click="editEmployee()">
+                                                        Edit
+                                                    </button>
+
+                                                    <button class="btn btn-success"  onclick="return confirm('Yakin ingin dihapus?')" ng-click="hapusEmployee(e)">
+                                                        Hapus
+                                                    </button>
+    
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- Mulai Table Baru-->
+
+                        <table class="table table-striped">
+                            <tr>
+                                <td>Nip</td>
+                                <td>
+                                    <input type="text" ng-model="employee.id_NUMBER" required="true">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Nama</td>
+                                <td>
+                                    <input type="text" ng-model="employee.name" required="true">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Tanggal</td>
+                                <td>
+                                    <input type="text" ng-model="employee.birth_DATE" required="true">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Gender</td>
+                                <td>
+                                    <input type="text" ng-model="employee.gender" required="true">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Position</td>
+                                <td>
+                                    <input type="text" ng-model="employee.position.id" required="true">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>&nbsp</td>
+                                <td>
+                                    <button ng-click="simpanMateri()">Simpan</button>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- AkhirTable Baru-->
+                                
+                            </div>
+                        </div>
+
+          
+            </main>
+                 <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Your Website 2020</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+         </div>  
+
+
+
+
+
+  <!-- Awal Modal1-->
+    <div ng-controller="CobaController" class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Data Pegawai</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+                            <div ng-show="enable" class="form-group">
+                                <label>ID Pegawai</label>
+                                <input type="text" class="form-control" ng-model="inputDataBarang.idBarang" disabled/>
+                            </div>
+                            <div class="form-group">
+                                <label>NIP</label>
+                                <input type="text" class="form-control" placeholder="Masukkan NIP Barang" ng-model="employee.id_NUMBER"/>
+                            </div>
+                            <div class="form-group">
+                                <label>NAME</label>
+                                <input type="text" class="form-control" placeholder="Masukkan Nama" ng-model="employee.name"/>
+                            </div>
+                            <div class="form-group">
+                                <label>BIRTH DATE</label>
+                                <input type="text" class="form-control" placeholder="Masukkan Birth Date" ng-model="employee.birth_DATE"/>
+                            </div>
+                             <div class="form-group">
+                                <label>GENDER</label>
+                                <input type="text" class="form-control" placeholder="Masukkan Gender" ng-model="employee.gender"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Position</label>
+                                <select class="form-control" ng-options="item as item.label for item in items track by item.id" ng-model="employee.position.id">  
+                                </select>
+                                </ul>
+                        </form>
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="simpanMateri()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <!-- Akhir Modal-->   
+
+  <!-- Awal Modal2-->
+  
+  
+  <!-- Akhir Modal-->      
+        <div th:replace="index::js"></div>
+        <script th:src="@{/angular.min.js}"></script>
+		<script th:src="@{/latihan.js}"></script>
+        <script th:src="@{/jquery-3.1.1.min.js}"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+     </body>
+</html>

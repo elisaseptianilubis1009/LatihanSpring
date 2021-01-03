@@ -15,12 +15,12 @@ public class ElisaController {
 
 	@RequestMapping ("/")
 	public String index () {
-		return "index";
+		return "Employee";
 	}
 	
 	@RequestMapping ("/layout")
 	public String home1 () {
-		return "layout";
+		return "list2";
 	}
 
 	
